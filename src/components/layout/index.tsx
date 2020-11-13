@@ -1,19 +1,33 @@
 import React from 'react';
-import { Box, Row, Column, Stack } from '../../designsystem/index';
+import { Column, Flex } from '../../designsystem/index';
 import Header from '../layout/header';
 import Sidebar from '../layout/sidebar';
 
 const Layout = ({ children }: any) => {
+  let [sidebarExpanded, setSidebarExpanded] = React.useState(true);
   return (
-    <>
-      <Header />
-      <Row>
-        <Sidebar />
-        <Box bg='#D3DDE6' height='100vh' width='100vw'>
-          {children}
-        </Box>
-      </Row>
-    </>
+    <Column spacing={0}>
+      <Header
+        sidebarExpanded={sidebarExpanded}
+        setSidebarExpanded={setSidebarExpanded}
+      />
+      <Sidebar
+        sidebarExpanded={sidebarExpanded}
+        setSidebarExpanded={setSidebarExpanded}
+      />
+      <Flex
+        pl={sidebarExpanded ? '256px' : '66px'}
+        transition='0.5s'
+        d='vertical'
+        bgColor='#D3DDE6'
+        w='full'
+        h='100vh'
+        overflow='scroll'
+        pt='64px'
+      >
+        {children}
+      </Flex>
+    </Column>
   );
 };
 
