@@ -15,20 +15,20 @@ const sidebarLinks = [
     links: [
       {
         id: 1,
-        title: 'Group 1 - Link 1',
-        path: '/link1',
+        title: 'Dashboard',
+        path: '/',
         icon: ChatIcon,
       },
       {
         id: 2,
-        title: 'Group 1 - Link 2',
-        path: '/link2',
+        title: 'Show Finder',
+        path: '/show-finder',
         icon: CheckIcon,
       },
       {
         id: 3,
-        title: 'Group 1 - Link 3,',
-        path: '/link3',
+        title: 'Gear Swap',
+        path: '/gear-swap',
         icon: CheckCircleIcon,
       },
     ],

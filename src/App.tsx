@@ -3,10 +3,13 @@ import React from 'react';
 
 import Layout from './components/layout';
 
+// Routes
+import { PublicRoutes } from './routes';
+
 const App = () => (
   <div className='App'>
     <Layout>
-      <p style={{ color: 'white' }}>Hello World</p>
+      <PublicRoutes />
     </Layout>
   </div>
 );

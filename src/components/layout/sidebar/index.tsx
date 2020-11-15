@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Box, Button, Column, Icon, Text } from '../../../designsystem/index';
 
 // Sidebar Links
@@ -8,8 +9,9 @@ const expandedWidth = 240;
 const minWidth = 55;
 
 const SidebarItem = ({ icon, title, id, path }: any) => {
+  console.log('path :>> ', path);
   return (
-    <Button d='flex' size='sm' variant='ghost' py={6}>
+    <Button as={Link} to={`${path}`} d='flex' size='sm' variant='ghost' py={6}>
       <Icon mr={5} fontSize={16} as={icon} />
       <Text>{title}</Text>
     </Button>
