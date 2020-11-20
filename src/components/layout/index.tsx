@@ -1,5 +1,5 @@
 import React from 'react';
-import { Column, Flex } from '../../designsystem/index';
+import { Box, Column, Flex } from '../../designsystem/index';
 import Header from '../layout/header';
 import Sidebar from '../layout/sidebar';
 
@@ -25,7 +25,9 @@ const Layout = ({ children }: any) => {
         overflow='scroll'
         pt='64px'
       >
-        {children}
+        <Box py={5} px={4}>
+          {children}
+        </Box>
       </Flex>
     </Column>
   );

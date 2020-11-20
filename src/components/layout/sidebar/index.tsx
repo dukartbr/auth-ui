@@ -6,12 +6,20 @@ import { Box, Button, Column, Icon, Text } from '../../../designsystem/index';
 import sidebarLinks from './sidebarlinks';
 
 const expandedWidth = 240;
-const minWidth = 55;
+const minWidth = 45;
 
 const SidebarItem = ({ icon, title, id, path }: any) => {
-  console.log('path :>> ', path);
   return (
-    <Button as={Link} to={`${path}`} d='flex' size='sm' variant='ghost' py={6}>
+    <Button
+      as={Link}
+      alignContent='left'
+      justifyContent='left'
+      to={`${path}`}
+      d='flex'
+      size='sm'
+      variant='ghost'
+      py={6}
+    >
       <Icon mr={5} fontSize={16} as={icon} />
       <Text>{title}</Text>
     </Button>
@@ -67,7 +75,13 @@ const Sidebar = ({ sidebarExpanded }: any) => {
               pl={0}
             >
               {linkGroup.links.map(({ icon, path, title, id }) => (
-                <SidebarItem icon={icon} path={path} title={title} id={id} />
+                <SidebarItem
+                  key={id}
+                  icon={icon}
+                  path={path}
+                  title={title}
+                  id={id}
+                />
               ))}
             </Box>
           </Box>

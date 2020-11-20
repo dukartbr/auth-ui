@@ -11,7 +11,7 @@ import {
 
 const sidebarLinks = [
   {
-    header: 'Menu Group 1',
+    header: 'Explore',
     links: [
       {
         id: 1,
@@ -22,53 +22,58 @@ const sidebarLinks = [
       {
         id: 2,
         title: 'Show Finder',
-        path: '/show-finder',
+        path: '/explore/show-finder',
         icon: CheckIcon,
       },
       {
         id: 3,
         title: 'Gear Swap',
-        path: '/gear-swap',
+        path: '/explore/gear-swap',
         icon: CheckCircleIcon,
       },
     ],
   },
   {
-    header: 'Menu Group 2',
+    header: 'Manage Your Band',
     links: [
       {
         id: 4,
-        title: 'Group 2 - Link 1',
-        path: 'link4',
+        title: 'Marketing',
+        path: '/manage/marketing',
         icon: DeleteIcon,
       },
       {
         id: 5,
-        title: 'Group 2 - Link 2',
-        path: 'link5',
+        title: 'Find Musicians',
+        path: '/manage/musicians',
         icon: DragHandleIcon,
+      },
+      {
+        id: 9,
+        title: 'Merch',
+        path: '/manage/merch',
       },
     ],
   },
   {
-    header: 'Menu Group 3',
+    header: 'Book A Tour',
     links: [
       {
         id: 6,
-        title: 'Group 3 - Link 1',
-        path: 'link6',
+        title: 'Venues',
+        path: '/tour/venus',
         icon: EditIcon,
       },
       {
         id: 7,
-        title: 'Group 3 - Link 2',
-        path: 'link7',
+        title: 'Bands',
+        path: '/tour/bands',
         icon: EmailIcon,
       },
       {
         id: 8,
-        title: 'Group 3 - Link 3',
-        path: 'link8',
+        title: 'Booking Agents',
+        path: '/tour/booking-agents',
         icon: ExternalLinkIcon,
       },
     ],

@@ -1,8 +1,14 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+
+// Auth Routes
+
+// How can we abstract this?
+import Signup from './pages/Signup';
+import SignIn from './pages/Signin';
 
 // Public Routes
-import Dashboard from './pages/Dashboard';
+import Dashboard from './pages/Dashboard/index';
 import ShowFinder from './pages/ShowFinder';
 import GearSwap from './pages/GearSwap';
 
@@ -10,7 +16,7 @@ import GearSwap from './pages/GearSwap';
 
 // Public Router
 
-export const PublicRoutes = () => {
+export const PublicRoutes = ({ user }: any) => {
   return (
     <Switch>
       <Route path='/show-finder'>
@@ -20,8 +26,14 @@ export const PublicRoutes = () => {
       <Route path='/gear-swap'>
         <GearSwap />
       </Route>
-      <Route default path='/'>
-        <Dashboard />
+      <Route path='/signup'>
+        <Signup />
+      </Route>
+      <Route path='/signin'>
+        <SignIn />
+      </Route>
+      <Route default exact path='/'>
+        <Dashboard user={user} />
       </Route>
     </Switch>
   );

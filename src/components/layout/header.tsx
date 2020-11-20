@@ -1,8 +1,10 @@
 import React from 'react';
+import { useBasicUser } from '../../store';
+import { Link } from 'react-router-dom';
 import {
   Avatar,
+  AvatarBadge,
   Box,
-  Button,
   Input,
   InputGroup,
   InputLeftElement,
@@ -11,7 +13,6 @@ import {
   MenuItem,
   MenuList,
   Row,
-  ChevronDownIcon,
   HamburgerIcon,
   IconButton,
   Search2Icon,
@@ -20,6 +21,8 @@ import {
 const CONTENT_WIDTHS = [1, 10.5 / 12];
 
 const Header = ({ sidebarExpanded, setSidebarExpanded }: any) => {
+  const user = useBasicUser((state) => state);
+
   return (
     <Row
       alignItems='center'
@@ -67,18 +70,42 @@ const Header = ({ sidebarExpanded, setSidebarExpanded }: any) => {
               type='text'
               color='#ffffff'
               borderColor='transparent'
-              Placeholder='Search...'
+              placeholder='Search...'
               borderRadius='64px'
             />
           </InputGroup>
           <Menu>
             <MenuButton>
-              <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' />
+              <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov'>
+                <AvatarBadge
+                  borderColor='transparent'
+                  boxSize='1.25em'
+                  // @ts-ignore
+                  bg={user.isLoggedIn ? 'green.500' : 'tomato'}
+                />
+              </Avatar>
             </MenuButton>
             <MenuList>
               <MenuItem>Download</MenuItem>
               <MenuItem>Settings</MenuItem>
-              <MenuItem>Logout</MenuItem>
+              <MenuItem
+                onClick={() =>
+                  // @ts-ignore
+                  user.logoutUser()
+                }
+              >
+                Logout
+              </MenuItem>
+              {!user.isLoggedIn && (
+                <Link to='/signup'>
+                  <MenuItem>Sign Up</MenuItem>
+                </Link>
+              )}
+              {!user.isLoggedIn && (
+                <Link to='/signin'>
+                  <MenuItem>Sign In</MenuItem>
+                </Link>
+              )}
             </MenuList>
           </Menu>
         </Row>
