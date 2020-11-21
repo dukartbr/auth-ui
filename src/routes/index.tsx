@@ -1,26 +1,27 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 // Auth Routes
 
-// How can we abstract this?
-import Signup from './pages/Signup';
+// Public Routes;
 import SignIn from './pages/Signin';
+import Signup from './pages/Signup';
 
-// Public Routes
+// Prive Routes
 import Dashboard from './pages/Dashboard/index';
 import ShowFinder from './pages/ShowFinder';
 import GearSwap from './pages/GearSwap';
 
-// Prive Routes
-
 // Public Router
 
 export const PublicRoutes = ({ user }: any) => {
+  const { currentUser } = useAuth();
+
+  console.log('currentUser :>> ', currentUser);
   return (
     <Switch>
       <Route path='/show-finder'>
-        {/* Here we can pass a 'user-location' prop that will find shows near the user */}
         <ShowFinder />
       </Route>
       <Route path='/gear-swap'>
@@ -32,8 +33,11 @@ export const PublicRoutes = ({ user }: any) => {
       <Route path='/signin'>
         <SignIn />
       </Route>
+      <Route path='/dashboard'>
+        {currentUser ? <Dashboard user={user} /> : <Redirect to='/signin' />}
+      </Route>
       <Route default exact path='/'>
-        <Dashboard user={user} />
+        {currentUser ? <Dashboard user={user} /> : <Redirect to='/signin' />}
       </Route>
     </Switch>
   );

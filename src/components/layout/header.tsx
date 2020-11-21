@@ -26,7 +26,7 @@ const Header = ({ sidebarExpanded, setSidebarExpanded }: any) => {
   const user = useBasicUser((state) => state);
   const history = useHistory();
 
-  const { signOut } = useAuth();
+  const { signOut, currentUser } = useAuth();
   return (
     <Row
       alignItems='center'
@@ -90,20 +90,19 @@ const Header = ({ sidebarExpanded, setSidebarExpanded }: any) => {
               </Avatar>
             </MenuButton>
             <MenuList>
-              <MenuItem>Download</MenuItem>
-              <MenuItem>Settings</MenuItem>
-              <MenuItem
-                onClick={async () => {
-                  signOut();
-                  history.push('/signin');
-                }}
-              >
-                Logout
-              </MenuItem>
-              {!user.isLoggedIn && (
-                <Link to='/signup'>
-                  <MenuItem>Sign Up</MenuItem>
-                </Link>
+              {user.isLoggedIn && (
+                <>
+                  <MenuItem>Download</MenuItem>
+                  <MenuItem>Settings</MenuItem>
+                  <MenuItem
+                    onClick={async () => {
+                      signOut();
+                      history.push('/signin');
+                    }}
+                  >
+                    Logout
+                  </MenuItem>
+                </>
               )}
               {!user.isLoggedIn && (
                 <Link to='/signin'>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Button, Card, FormikTextField } from '../../designsystem';
 import * as Yup from 'yup';
+import { useHistory } from 'react-router-dom';
 import { Field, Form, Formik, FormikProps } from 'formik';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -21,6 +22,7 @@ const SignUpFormSchema = Yup.object().shape({
 const SignUpForm = () => {
   // @ts-ignore
   const { signUp, currentUser } = useAuth();
+  const history = useHistory();
 
   let [isSubmitting, setIsSubmitting] = React.useState(false);
 
@@ -65,7 +67,7 @@ const SignUpForm = () => {
                 component={FormikTextField}
                 formControlProps={{ height: '62px', mb: '32px' }}
               />
-              <pre>{currentUser.email}</pre>
+              <pre>{currentUser && currentUser.email}</pre>
               <Button
                 mt={3}
                 onClick={() => formikProps.submitForm()}

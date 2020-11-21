@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Button, Column, Icon, Text } from '../../../designsystem/index';
+import { useAuth } from '../../../contexts/AuthContext';
 
 // Sidebar Links
 import sidebarLinks from './sidebarlinks';
@@ -8,13 +9,29 @@ import sidebarLinks from './sidebarlinks';
 const expandedWidth = 240;
 const minWidth = 45;
 
-const SidebarItem = ({ icon, title, id, path }: any) => {
+const SidebarItem = ({
+  icon,
+  title,
+  id,
+  path,
+  isAuthRoute,
+}: {
+  icon: any;
+  title: string;
+  id: any;
+  path: string;
+  isAuthRoute: boolean;
+}) => {
+  const { currentUser } = useAuth();
+  let routePath =
+    (isAuthRoute && currentUser) || !isAuthRoute ? path : '/signin';
+
   return (
     <Button
       as={Link}
       alignContent='left'
       justifyContent='left'
-      to={`${path}`}
+      to={routePath}
       d='flex'
       size='sm'
       variant='ghost'
@@ -74,13 +91,14 @@ const Sidebar = ({ sidebarExpanded }: any) => {
               justifyItems='center'
               pl={0}
             >
-              {linkGroup.links.map(({ icon, path, title, id }) => (
+              {linkGroup.links.map(({ icon, path, title, id, isAuthRoute }) => (
                 <SidebarItem
                   key={id}
                   icon={icon}
                   path={path}
                   title={title}
                   id={id}
+                  isAuthRoute={isAuthRoute}
                 />
               ))}
             </Box>
