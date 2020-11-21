@@ -49,6 +49,9 @@ export const FormikTextField: React.FC<FormikTextFieldProps> = ({
       )}
       <InputGroup size='sm'>
         <Input
+          bg='#ffffff'
+          border='none'
+          borderRadius='8px'
           id={id || field.name}
           name={field.name}
           type={type}

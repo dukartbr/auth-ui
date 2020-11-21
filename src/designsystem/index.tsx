@@ -73,9 +73,11 @@ interface CardProps {
 
 export const Card: React.FC<CardProps> = ({ header, children }) => {
   return (
-    <Stack bg='#ffffff' width='100%' py={4} px={6} borderRadius='35px'>
-      <HStack>
-        <Box>{header}</Box>
+    <Stack bg='#ffffff' width='100%' py={4} px={6} borderRadius='8px'>
+      <HStack justifyContent='center'>
+        <Box fontSize='32px' fontWeight='bold'>
+          {header}
+        </Box>
       </HStack>
       <HStack>{children}</HStack>
     </Stack>

@@ -20,11 +20,11 @@ const SignUpFormSchema = Yup.object().shape({
 
 const SignUpForm = () => {
   // @ts-ignore
-  const { signUp } = useAuth();
+  const { signUp, currentUser } = useAuth();
 
   let [isSubmitting, setIsSubmitting] = React.useState(false);
 
-  console.log('signUp :>> ', signUp);
+  console.log('currentUser :>> ', currentUser);
   return (
     <Card header='Soundlife Sign Up'>
       <Formik
@@ -65,7 +65,7 @@ const SignUpForm = () => {
                 component={FormikTextField}
                 formControlProps={{ height: '62px', mb: '32px' }}
               />
-
+              <pre>{currentUser.email}</pre>
               <Button
                 mt={3}
                 onClick={() => formikProps.submitForm()}

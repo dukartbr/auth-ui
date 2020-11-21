@@ -20,7 +20,7 @@ interface BasicUser extends State {
   lastName: string;
   userName: string;
   isLoggedIn: boolean;
-  logoutUser: () => void;
+  toggleLoginUser: (args: any) => void;
   loginAttempts: number;
   increaseLoginAttempt: () => void;
 }
@@ -30,7 +30,7 @@ export const useBasicUser = create<BasicUser>((set) => ({
   lastName: 'Dukart',
   userName: 'bradydukart',
   isLoggedIn: true,
-  logoutUser: () => set((state) => ({ isLoggedIn: !state.isLoggedIn })),
+  toggleLoginUser: () => set((state) => ({ isLoggedIn: !state.isLoggedIn })),
   loginAttempts: 0,
   increaseLoginAttempt: () =>
     set((state) => ({ loginAttempts: state.loginAttempts + 1 })),

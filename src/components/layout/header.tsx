@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { useBasicUser } from '../../store';
 import { Link } from 'react-router-dom';
 import {
@@ -17,12 +18,15 @@ import {
   IconButton,
   Search2Icon,
 } from '../../designsystem/index';
+import { useAuth } from '../../contexts/AuthContext';
 
 const CONTENT_WIDTHS = [1, 10.5 / 12];
 
 const Header = ({ sidebarExpanded, setSidebarExpanded }: any) => {
   const user = useBasicUser((state) => state);
+  const history = useHistory();
 
+  const { signOut } = useAuth();
   return (
     <Row
       alignItems='center'
@@ -71,7 +75,7 @@ const Header = ({ sidebarExpanded, setSidebarExpanded }: any) => {
               color='#ffffff'
               borderColor='transparent'
               placeholder='Search...'
-              borderRadius='64px'
+              borderRadius='8px'
             />
           </InputGroup>
           <Menu>
@@ -89,10 +93,10 @@ const Header = ({ sidebarExpanded, setSidebarExpanded }: any) => {
               <MenuItem>Download</MenuItem>
               <MenuItem>Settings</MenuItem>
               <MenuItem
-                onClick={() =>
-                  // @ts-ignore
-                  user.logoutUser()
-                }
+                onClick={async () => {
+                  signOut();
+                  history.push('/signin');
+                }}
               >
                 Logout
               </MenuItem>
