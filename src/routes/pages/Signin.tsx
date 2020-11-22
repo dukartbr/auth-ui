@@ -1,5 +1,12 @@
 import React from 'react';
-import { Box, Button, Card, FormikTextField, Stack } from '../../designsystem';
+import {
+  Box,
+  Button,
+  Card,
+  FormikTextField,
+  Stack,
+  Row,
+} from '../../designsystem';
 import * as Yup from 'yup';
 import { useHistory } from 'react-router-dom';
 import { Field, Form, Formik, FormikProps } from 'formik';
@@ -77,7 +84,7 @@ const SignInForm = () => {
           )}
         </Formik>
       </Stack>
-      <Stack>
+      <Row>
         <Button
           onClick={() => {
             history.push('/signup');
@@ -85,7 +92,7 @@ const SignInForm = () => {
         >
           Need An Account?
         </Button>
-      </Stack>
+      </Row>
     </Card>
   );
 };
