@@ -7,6 +7,12 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuIcon,
+  MenuCommand,
+  MenuDivider,
   Box,
   Button,
   Flex,
@@ -14,18 +20,30 @@ import {
   FormLabel,
   FormErrorMessage,
   HStack,
+  Image,
   Input,
   InputGroup,
   InputLeftElement,
   Icon,
   IconButton,
   Link,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
   Stack,
   Text,
   VStack,
 } from '@chakra-ui/core';
 
+// Chakra Hooks
+import { useDisclosure } from '@chakra-ui/react';
+
 export {
+  AddIcon,
   ChevronDownIcon,
   ChatIcon,
   CheckIcon,
@@ -46,6 +64,12 @@ export {
   MenuButton,
   MenuList,
   MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuIcon,
+  MenuCommand,
+  MenuDivider,
   Box,
   Button,
   Flex,
@@ -58,10 +82,19 @@ export {
   InputLeftElement,
   Icon,
   IconButton,
+  Image,
   Link,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
   Stack,
   Text,
   VStack as Column,
+  useDisclosure,
 };
 
 // Form UI
@@ -73,7 +106,7 @@ interface CardProps {
 
 export const Card: React.FC<CardProps> = ({ header, children }) => {
   return (
-    <Stack bg='#ffffff' width='100%' py={4} px={6} borderRadius='8px'>
+    <Stack bg='#ffffff' width='100%' py={4} px={6} borderRadius='8px' my={6}>
       <HStack justifyContent='center'>
         <Box fontSize='32px' fontWeight='bold'>
           {header}

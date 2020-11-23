@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Box, Button } from '../../../designsystem';
+import { AddIcon, Box, Button, Text } from '../../../designsystem';
 
 import UserWelcome from './UserWelcome';
 
@@ -12,7 +12,10 @@ const Dashboard = ({ user }: any) => {
         onClick={() => {
           history.push('/showbuilder');
         }}
-      />
+      >
+        <AddIcon />
+        <Text mx={2}>Book A Show</Text>
+      </Button>
       <UserWelcome user={user} />
     </Box>
   );

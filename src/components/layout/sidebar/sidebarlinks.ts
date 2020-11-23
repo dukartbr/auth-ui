@@ -32,7 +32,7 @@ const sidebarLinks = [
         title: 'Gear Swap',
         path: 'gear-swap',
         icon: CheckCircleIcon,
-        isAuthRoute: false,
+        isAuthRoute: true,
       },
     ],
   },
