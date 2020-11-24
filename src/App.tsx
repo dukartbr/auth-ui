@@ -1,5 +1,5 @@
 import React from 'react';
-import { useBasicUser } from './store';
+import { LoggedInUser } from './store';
 import { AuthProvider } from './contexts/AuthContext';
 
 import Layout from './components/layout';
@@ -10,7 +10,7 @@ import { PublicRoutes } from './routes';
 // Mock Users
 
 const App = () => {
-  const user = useBasicUser((state) => state);
+  const user = LoggedInUser((state) => state);
   return (
     <div className='App'>
       <AuthProvider>

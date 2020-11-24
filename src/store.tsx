@@ -15,7 +15,7 @@ export const useStyleSettings = create<StyleSettings>((set) => ({
 }));
 
 // Users
-interface BasicUser extends State {
+interface LoggedInUserProps extends State {
   firstName: string;
   lastName: string;
   userName: string;
@@ -25,7 +25,7 @@ interface BasicUser extends State {
   increaseLoginAttempt: () => void;
 }
 
-export const useBasicUser = create<BasicUser>((set) => ({
+export const LoggedInUser = create<LoggedInUserProps>((set) => ({
   firstName: 'Brady',
   lastName: 'Dukart',
   userName: 'bradydukart',

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { useBasicUser } from '../../store';
+import { LoggedInUser } from '../../store';
 import { Link } from 'react-router-dom';
 import {
   Avatar,
@@ -23,7 +23,7 @@ import { useAuth } from '../../contexts/AuthContext';
 const CONTENT_WIDTHS = [1, 10.5 / 12];
 
 const Header = ({ sidebarExpanded, setSidebarExpanded }: any) => {
-  const user = useBasicUser((state) => state);
+  const user = LoggedInUser((state) => state);
   const history = useHistory();
 
   const { signOut } = useAuth();

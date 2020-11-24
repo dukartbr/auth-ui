@@ -1,13 +1,13 @@
 import React from 'react';
 import { auth } from '../firebase';
-import { useBasicUser } from '../store';
+import { LoggedInUser } from '../store';
 
 const AuthContext = React.createContext({});
 
 export const useAuth: any = () => React.useContext(AuthContext);
 
 export const AuthProvider = ({ children }: any) => {
-  let { toggleLoginUser } = useBasicUser();
+  let { toggleLoginUser } = LoggedInUser();
   let [currentUser, setCurrentUser] = React.useState(null);
   let [loading, setLoading] = React.useState(true);
 
@@ -18,7 +18,6 @@ export const AuthProvider = ({ children }: any) => {
   const signIn = (email: string, password: string) => {
     let res = auth.signInWithEmailAndPassword(email, password);
     toggleLoginUser(res);
-    console.log('res', res);
   };
 
   const signOut = () => {

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Button, Card, FormikTextField } from '../../designsystem';
+import { useHistory } from 'react-router-dom';
+import { Box, Button, Card, FormikTextField, Row } from '../../designsystem';
 import * as Yup from 'yup';
 import { Field, Form, Formik, FormikProps } from 'formik';
 import { useAuth } from '../../contexts/AuthContext';
@@ -21,61 +22,74 @@ const SignUpFormSchema = Yup.object().shape({
 const SignUpForm = () => {
   const { signUp, currentUser } = useAuth();
 
+  let history = useHistory();
+
   let [isSubmitting, setIsSubmitting] = React.useState(false);
 
   console.log('currentUser :>> ', currentUser);
   return (
     <Card header='Soundlife Sign Up'>
-      <Formik
-        initialValues={{
-          email: '',
-          password: '',
-          confirmPassword: '',
-        }}
-        validationSchema={SignUpFormSchema}
-        onSubmit={async (values: SignUpFormProps) => {
-          setIsSubmitting(true);
-          await signUp(values.email, values.password);
-          setIsSubmitting(false);
-        }}
-      >
-        {(formikProps: FormikProps<SignUpFormProps>) => (
-          <Box>
-            <Form>
-              <Field
-                name='email'
-                label='Email'
-                component={FormikTextField}
-                formControlProps={{ height: '62px', mb: '32px' }}
-              />
+      <Row justifyContent='center'>
+        <Formik
+          initialValues={{
+            email: '',
+            password: '',
+            confirmPassword: '',
+          }}
+          validationSchema={SignUpFormSchema}
+          onSubmit={async (values: SignUpFormProps) => {
+            setIsSubmitting(true);
+            await signUp(values.email, values.password);
+            setIsSubmitting(false);
+          }}
+        >
+          {(formikProps: FormikProps<SignUpFormProps>) => (
+            <Box bg='#D3DDE6' py={3} px={4} my={3} borderRadius='8px'>
+              <Form>
+                <Field
+                  name='email'
+                  label='Email'
+                  component={FormikTextField}
+                  formControlProps={{ height: '62px', mb: '32px' }}
+                />
 
-              <Field
-                name='password'
-                label='Password'
-                type='password'
-                component={FormikTextField}
-                formControlProps={{ height: '62px', mb: '32px' }}
-              />
+                <Field
+                  name='password'
+                  label='Password'
+                  type='password'
+                  component={FormikTextField}
+                  formControlProps={{ height: '62px', mb: '32px' }}
+                />
 
-              <Field
-                name='confirmPassword'
-                label='Confirm Password'
-                type='password'
-                component={FormikTextField}
-                formControlProps={{ height: '62px', mb: '32px' }}
-              />
-              <pre>{currentUser && currentUser.email}</pre>
-              <Button
-                mt={3}
-                onClick={() => formikProps.submitForm()}
-                isDisabled={isSubmitting}
-              >
-                Submit
-              </Button>
-            </Form>
-          </Box>
-        )}
-      </Formik>
+                <Field
+                  name='confirmPassword'
+                  label='Confirm Password'
+                  type='password'
+                  component={FormikTextField}
+                  formControlProps={{ height: '62px', mb: '32px' }}
+                />
+                <pre>{currentUser && currentUser.email}</pre>
+                <Button
+                  mt={3}
+                  onClick={() => formikProps.submitForm()}
+                  isDisabled={isSubmitting}
+                >
+                  Submit
+                </Button>
+              </Form>
+            </Box>
+          )}
+        </Formik>
+      </Row>
+      <Row justifyContent='center'>
+        <Button
+          onClick={() => {
+            history.push('/signin');
+          }}
+        >
+          Already Have An Account?
+        </Button>
+      </Row>
     </Card>
   );
 };

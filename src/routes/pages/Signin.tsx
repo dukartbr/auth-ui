@@ -4,8 +4,8 @@ import {
   Button,
   Card,
   FormikTextField,
-  Stack,
   Row,
+  useToast,
 } from '../../designsystem';
 import * as Yup from 'yup';
 import { useHistory } from 'react-router-dom';
@@ -23,15 +23,15 @@ const SignInFormSchema = Yup.object().shape({
 });
 
 const SignInForm = () => {
-  // @ts-ignore
   const { signIn } = useAuth();
   let history = useHistory();
+  let toast = useToast();
 
   let [isSubmitting, setIsSubmitting] = React.useState(false);
   let [error, setError] = React.useState('');
   return (
     <Card header='Soundlife Sign In'>
-      <Stack>
+      <Row justifyContent='center'>
         <Formik
           initialValues={{
             email: '',
@@ -42,10 +42,17 @@ const SignInForm = () => {
             try {
               setIsSubmitting(true);
               await signIn(values.email, values.password);
-              console.log('sigining in');
-              // history.push('/dashboard');
+              toast({
+                description: 'You are now signed in!',
+                duration: 9000,
+                isClosable: true,
+              });
             } catch (err) {
               setIsSubmitting(false);
+              toast({
+                status: 'error',
+                description: 'There was a failure to authenticate',
+              });
               setError('There was an error logging in');
             }
 
@@ -53,7 +60,7 @@ const SignInForm = () => {
           }}
         >
           {(formikProps: FormikProps<SignInFormProps>) => (
-            <Box bg='#D3DDE6' py={3} px={4} borderRadius='8px'>
+            <Box bg='#D3DDE6' py={3} px={4} my={3} borderRadius='8px'>
               {error}
               <Form>
                 <Field
@@ -83,8 +90,8 @@ const SignInForm = () => {
             </Box>
           )}
         </Formik>
-      </Stack>
-      <Row>
+      </Row>
+      <Row justifyContent='center'>
         <Button
           onClick={() => {
             history.push('/signup');

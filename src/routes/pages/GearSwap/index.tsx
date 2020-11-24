@@ -18,12 +18,12 @@ interface GearSwapPageProps {}
 
 const GearSwap: React.FC<GearSwapPageProps> = () => {
   let [filterType, setFilterType] = React.useState('all');
-  let [priceRange, setPriceRange] = React.useState([]);
-  let [doesShip, setDoesShip] = React.useState(true);
+  let [priceRange, setPriceRange] = React.useState([0, 1000000]);
+  let [hideLocal, setHideLocal] = React.useState(false);
 
   React.useEffect(() => {
-    console.log('doesShip :>> ', doesShip);
-  }, [doesShip]);
+    console.log('hideLocal :>> ', hideLocal);
+  }, [hideLocal]);
 
   let filteredbyTypeListings = sampleGearListings.filter((listing) =>
     filterType !== 'all' ? listing.type === filterType : listing
@@ -34,8 +34,8 @@ const GearSwap: React.FC<GearSwapPageProps> = () => {
       listing.price >= priceRange[0] && listing.price <= priceRange[1]
   );
 
-  let filteredByShippingListings = filteredByPriceListings.filter(
-    (listing) => listing.willShip === doesShip
+  let filteredByShippingListings = filteredByPriceListings.filter((listing) =>
+    hideLocal ? listing.willShip === true : listing
   );
 
   return (
@@ -89,7 +89,7 @@ const GearSwap: React.FC<GearSwapPageProps> = () => {
           </Menu>
           <Menu closeOnSelect={false}>
             <MenuButton as={Button} mx={3}>
-              Shipping
+              Shipping?
             </MenuButton>
             <MenuList minWidth='240px'>
               <MenuOptionGroup
@@ -97,14 +97,14 @@ const GearSwap: React.FC<GearSwapPageProps> = () => {
                 type='radio'
                 onChange={(willShip) => {
                   willShip === 'will-ship'
-                    ? setDoesShip(true)
-                    : setDoesShip(false);
+                    ? setHideLocal(true)
+                    : setHideLocal(false);
                 }}
               >
-                <MenuItemOption value='will-ship'>Will Ship</MenuItemOption>
-                <MenuItemOption value='will-not-ship'>
-                  Will Not Ship
+                <MenuItemOption value='will-ship'>
+                  Willing To Ship
                 </MenuItemOption>
+                <MenuItemOption value='will-not-ship'>All</MenuItemOption>
               </MenuOptionGroup>
             </MenuList>
           </Menu>
