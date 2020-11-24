@@ -26,7 +26,7 @@ const Header = ({ sidebarExpanded, setSidebarExpanded }: any) => {
   const user = useBasicUser((state) => state);
   const history = useHistory();
 
-  const { signOut, currentUser } = useAuth();
+  const { signOut } = useAuth();
   return (
     <Row
       alignItems='center'

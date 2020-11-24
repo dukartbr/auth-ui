@@ -3,6 +3,7 @@ import React from 'react';
 import {
   Avatar,
   AvatarBadge,
+  Divider,
   Menu,
   MenuButton,
   MenuList,
@@ -60,6 +61,7 @@ export {
 export {
   Avatar,
   AvatarBadge,
+  Divider,
   Menu,
   MenuButton,
   MenuList,

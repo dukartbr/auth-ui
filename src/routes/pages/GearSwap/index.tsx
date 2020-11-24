@@ -6,27 +6,36 @@ import {
   Menu,
   MenuButton,
   MenuList,
-  MenuItem,
   MenuItemOption,
-  MenuGroup,
   MenuOptionGroup,
-  MenuIcon,
-  MenuCommand,
-  MenuDivider,
   Row,
-  Text,
 } from '../../../designsystem';
 import { GearListingItem } from '../../../components/gear';
 
-import { sampleGearListings, sampleGearListingProps } from './gearItems';
+import { sampleGearListings } from './gearItems';
 
 interface GearSwapPageProps {}
 
 const GearSwap: React.FC<GearSwapPageProps> = () => {
-  let [filterType, setFilterType] = React.useState('guitar');
+  let [filterType, setFilterType] = React.useState('all');
+  let [priceRange, setPriceRange] = React.useState([]);
+  let [doesShip, setDoesShip] = React.useState(true);
 
-  let filteredListings = sampleGearListings.filter(
-    (listing) => (listing.type = filterType)
+  React.useEffect(() => {
+    console.log('doesShip :>> ', doesShip);
+  }, [doesShip]);
+
+  let filteredbyTypeListings = sampleGearListings.filter((listing) =>
+    filterType !== 'all' ? listing.type === filterType : listing
+  );
+
+  let filteredByPriceListings = filteredbyTypeListings.filter(
+    (listing) =>
+      listing.price >= priceRange[0] && listing.price <= priceRange[1]
+  );
+
+  let filteredByShippingListings = filteredByPriceListings.filter(
+    (listing) => listing.willShip === doesShip
   );
 
   return (
@@ -60,14 +69,21 @@ const GearSwap: React.FC<GearSwapPageProps> = () => {
               Price Range
             </MenuButton>
             <MenuList minWidth='240px'>
-              <MenuOptionGroup defaultValue='all' type='radio'>
-                <MenuItemOption value='all'>All</MenuItemOption>
-                <MenuItemOption value='0-100'>$0 - $100</MenuItemOption>
-                <MenuItemOption value='101-301'>$101 - $300</MenuItemOption>
-                <MenuItemOption value='301-500'>$301 - $500</MenuItemOption>
-                <MenuItemOption value='501-750'>$501 - $750</MenuItemOption>
-                <MenuItemOption value='751-1000'>$751 - $1000</MenuItemOption>
-                <MenuItemOption value='1000+'>$1000 +</MenuItemOption>
+              <MenuOptionGroup
+                defaultValue='all'
+                type='radio'
+                onChange={(price) => {
+                  // @ts-ignore
+                  setPriceRange(price.toString().split(','));
+                }}
+              >
+                <MenuItemOption value='0, 10000'>All</MenuItemOption>
+                <MenuItemOption value='0,100'>$0 - $100</MenuItemOption>
+                <MenuItemOption value='101,301'>$101 - $300</MenuItemOption>
+                <MenuItemOption value='301,500'>$301 - $500</MenuItemOption>
+                <MenuItemOption value='501,750'>$501 - $750</MenuItemOption>
+                <MenuItemOption value='751,1000'>$751 - $1000</MenuItemOption>
+                <MenuItemOption value='1000'>$1000 +</MenuItemOption>
               </MenuOptionGroup>
             </MenuList>
           </Menu>
@@ -76,7 +92,15 @@ const GearSwap: React.FC<GearSwapPageProps> = () => {
               Shipping
             </MenuButton>
             <MenuList minWidth='240px'>
-              <MenuOptionGroup defaultValue='will-ship' type='radio'>
+              <MenuOptionGroup
+                defaultValue='will-ship'
+                type='radio'
+                onChange={(willShip) => {
+                  willShip === 'will-ship'
+                    ? setDoesShip(true)
+                    : setDoesShip(false);
+                }}
+              >
                 <MenuItemOption value='will-ship'>Will Ship</MenuItemOption>
                 <MenuItemOption value='will-not-ship'>
                   Will Not Ship
@@ -88,23 +112,25 @@ const GearSwap: React.FC<GearSwapPageProps> = () => {
       </Row>
       <Row>
         <Box width='100%'>
-          {chunk(filteredListings, 4).map((chunkedSampleGearListings) => (
-            <Row my={6} width='100%'>
-              {chunkedSampleGearListings.map(
-                ({ id, title, type, price, willShip, imageURL }) => (
-                  <GearListingItem
-                    key={id}
-                    id={id}
-                    title={title}
-                    type={type}
-                    price={price}
-                    willShip={willShip}
-                    imageURL={imageURL}
-                  />
-                )
-              )}
-            </Row>
-          ))}
+          {chunk(filteredByShippingListings, 4).map(
+            (chunkedSampleGearListings, i) => (
+              <Row my={6} width='100%' key={i}>
+                {chunkedSampleGearListings.map(
+                  ({ id, title, type, price, willShip, imageURL }) => (
+                    <GearListingItem
+                      key={id}
+                      id={id}
+                      title={title}
+                      type={type}
+                      price={price}
+                      willShip={willShip}
+                      imageURL={imageURL}
+                    />
+                  )
+                )}
+              </Row>
+            )
+          )}
         </Box>
       </Row>
     </>

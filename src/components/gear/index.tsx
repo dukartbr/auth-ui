@@ -48,14 +48,25 @@ export const GearListingItem: React.FC<sampleGearListingProps> = ({
         <ModalContent>
           <ModalHeader>{title}</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
-            <Box justifyContent='center' width='100%'>
-              <Image src={imageURL} alt={`${title}-${id}`} />
+          <ModalBody justifyContent='center'>
+            <Box>
+              <Image src={imageURL} mx='auto' alt={`${title}-${id}`} />
               <Row>
-                <Text>{type}</Text>
-                <Text>
-                  This item {willShip ? 'will ship' : 'does not ship'}
-                </Text>
+                <Box maxW='50%'>
+                  <Text>Category: {type}</Text>
+                  <Text color='gray.500' fontSize='16px'>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Hic, necessitatibus repudiandae? Explicabo, quis. Iure harum
+                    quia natus. Modi tempora, officia inventore vitae dolorum
+                    magni dicta minus numquam, ducimus distinctio eius?
+                  </Text>
+                </Box>
+                <Box maxW='50%'>
+                  <Text>${price}</Text>
+                  <Text>
+                    This item {willShip ? 'will ship' : 'does not ship'}
+                  </Text>
+                </Box>
               </Row>
             </Box>
           </ModalBody>
@@ -66,7 +77,7 @@ export const GearListingItem: React.FC<sampleGearListingProps> = ({
               }}
               mx={2}
             >
-              Purchase
+              Contact Seller
             </Button>
             <Button onClick={onClose} mx={2}>
               Cancel

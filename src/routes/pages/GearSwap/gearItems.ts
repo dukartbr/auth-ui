@@ -20,7 +20,7 @@ export const sampleGearListings = [
     id: 2,
     title: 'Kemper Rack',
     type: 'amp',
-    price: 1200,
+    price: 1000,
     willShip: false,
     imageURL: 'https://via.placeholder.com/150',
   },
