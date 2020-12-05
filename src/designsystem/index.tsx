@@ -41,12 +41,7 @@ import {
 } from '@chakra-ui/core';
 
 // Chakra Hooks
-import {
-  Select,
-  useDisclosure,
-  useToast,
-  UseToastOptions,
-} from '@chakra-ui/react';
+import { useDisclosure, useToast } from '@chakra-ui/react';
 
 export {
   AddIcon,

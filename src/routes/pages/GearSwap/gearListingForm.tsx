@@ -1,19 +1,14 @@
 import React from 'react';
-import { Field, Form, Formik, FormikProps } from 'formik';
+import { Field, Form, Formik } from 'formik';
 import {
   Box,
-  Button,
-  Image,
   FormikTextField,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Row,
-  Text,
 } from '../../../designsystem';
 
 interface GearListingFormProps {

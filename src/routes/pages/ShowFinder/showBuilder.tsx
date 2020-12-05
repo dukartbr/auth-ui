@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Box, Row } from '../../../designsystem';
+import { Card } from '../../../designsystem';
 
 const ShowBuilder = () => {
   return (
