@@ -10,7 +10,7 @@ const Dashboard = ({ user }: any) => {
     <Box>
       <Button
         onClick={() => {
-          history.push('/showbuilder');
+          history.push('/show-builder');
         }}
       >
         <AddIcon />

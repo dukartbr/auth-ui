@@ -41,7 +41,12 @@ import {
 } from '@chakra-ui/core';
 
 // Chakra Hooks
-import { useDisclosure, useToast as useChakraToast } from '@chakra-ui/react';
+import {
+  Select,
+  useDisclosure,
+  useToast,
+  UseToastOptions,
+} from '@chakra-ui/react';
 
 export {
   AddIcon,
@@ -97,6 +102,7 @@ export {
   Text,
   VStack as Column,
   useDisclosure,
+  useToast,
 };
 
 // Form UI
@@ -117,29 +123,4 @@ export const Card: React.FC<CardProps> = ({ header, children }) => {
       {children}
     </Stack>
   );
-};
-
-export const useToast = () => {
-  let toast = useChakraToast();
-
-  const handleToast = ({
-    title,
-    description,
-    status = 'success',
-    position = 'top-right',
-    duration = status ? 5000 : 10000,
-    isClosable = true,
-    ...rest
-  }: any) => {
-    toast({
-      title,
-      description,
-      status,
-      position,
-      duration,
-      isClosable,
-      ...rest,
-    });
-  };
-  return React.useCallback(handleToast, []);
 };

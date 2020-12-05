@@ -42,11 +42,7 @@ const SignInForm = () => {
             try {
               setIsSubmitting(true);
               await signIn(values.email, values.password);
-              toast({
-                description: 'You are now signed in!',
-                duration: 9000,
-                isClosable: true,
-              });
+              history.push('/dashboard');
             } catch (err) {
               setIsSubmitting(false);
               toast({
@@ -60,7 +56,14 @@ const SignInForm = () => {
           }}
         >
           {(formikProps: FormikProps<SignInFormProps>) => (
-            <Box bg='#D3DDE6' py={3} px={4} my={3} borderRadius='8px'>
+            <Box
+              bg='#D3DDE6'
+              py={15}
+              px={16}
+              my={3}
+              borderRadius='8px'
+              width='55%'
+            >
               {error}
               <Form>
                 <Field
@@ -77,7 +80,7 @@ const SignInForm = () => {
                   component={FormikTextField}
                   formControlProps={{ height: '62px', my: '30px' }}
                 />
-                <Box width='100%' justifyContent='center'>
+                <Row justifyContent='center'>
                   <Button
                     mt={3}
                     isDisabled={isSubmitting}
@@ -85,7 +88,7 @@ const SignInForm = () => {
                   >
                     Submit
                   </Button>
-                </Box>
+                </Row>
               </Form>
             </Box>
           )}

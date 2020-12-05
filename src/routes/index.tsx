@@ -11,6 +11,7 @@ import Signup from './pages/Signup';
 // Prive Routes
 import Dashboard from './pages/Dashboard/index';
 import ShowFinder from './pages/ShowFinder';
+import ShowBuilder from './pages/ShowFinder/showBuilder';
 import GearSwap from '../routes/pages/GearSwap';
 
 // Public Router
@@ -21,6 +22,9 @@ export const PublicRoutes = ({ user }: any) => {
     <Switch>
       <Route path='/show-finder'>
         <ShowFinder />
+      </Route>
+      <Route path='/show-builder'>
+        <ShowBuilder />
       </Route>
       <Route path='/gear-swap'>
         <GearSwap />

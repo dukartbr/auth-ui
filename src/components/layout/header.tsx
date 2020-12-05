@@ -6,6 +6,7 @@ import {
   Avatar,
   AvatarBadge,
   Box,
+  Button,
   Input,
   InputGroup,
   InputLeftElement,
@@ -17,12 +18,14 @@ import {
   HamburgerIcon,
   IconButton,
   Search2Icon,
+  useToast,
 } from '../../designsystem/index';
 import { useAuth } from '../../contexts/AuthContext';
 
 const CONTENT_WIDTHS = [1, 10.5 / 12];
 
 const Header = ({ sidebarExpanded, setSidebarExpanded }: any) => {
+  const toast = useToast();
   const user = LoggedInUser((state) => state);
   const history = useHistory();
 
@@ -62,6 +65,16 @@ const Header = ({ sidebarExpanded, setSidebarExpanded }: any) => {
           maxWidth={1092}
           mx='auto'
         >
+          <Button
+            onClick={() => {
+              toast({
+                status: 'error',
+                title: 'Test Toast',
+              });
+            }}
+          >
+            Trigger Toast
+          </Button>
           <InputGroup
             size='md'
             width='300px'

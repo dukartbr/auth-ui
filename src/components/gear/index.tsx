@@ -13,7 +13,7 @@ import {
   Row,
   Text,
   useDisclosure,
-} from '../../designsystem';
+} from '../..//designsystem';
 
 import { sampleGearListingProps } from '../../routes/pages/GearSwap/gearItems';
 
@@ -28,7 +28,16 @@ export const GearListingItem: React.FC<sampleGearListingProps> = ({
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Box bg='#ffffff' py={4} px={6} width='25%' borderRadius='8px'>
+    <Box
+      bg='#ffffff'
+      py={4}
+      px={6}
+      width='25%'
+      borderRadius='8px'
+      boxShadow='1px 1px 2px #999999'
+      my={2}
+      mx={5}
+    >
       <Row justifyContent='center' width='100%'>
         <Image src={imageURL} alt={`${title}-${id}`} />
       </Row>
